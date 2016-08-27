@@ -22,17 +22,17 @@ import pandas as pd
 
 
 We need requests to fetch the url and BeautifulSoup to tranform the ugly mess in <code>req.text</code> in somethin more 
-<em>digestible</em> like a soup.
+"digestible" like a <code>soup</code>.
 
-<strong>Bold</strong>
-<em>Italics</em>
-<u>Underline</u>
+
 {% highlight python %}
 url="https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes"
 headers = {"User-Agent": "Mozilla/5.0"}
 req=requests.get(url,headers=headers)
 soup = BeautifulSoup(req.text, "lxml")  #Without "lxml" there is a Warning.
 {% endhighlight %}
+
+At this point we have to open the [url](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes)  <span style="background-color:#ccc9f1;">right-click -> View page source</span> to understand how tables are html formatted.
 
 {% highlight python %}
 Date=[]
