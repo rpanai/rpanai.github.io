@@ -65,7 +65,7 @@ Finally every cell is delimited by <code>td</code>, another job for <code>findAL
 Date=[]
 Lat=[]
 Long=[]
-Death=[]
+Fatalities=[]
 Mag=[]
 for table in soup.findAll(("table", { "class" : "wikitable sortable" })):
     for row in table.findAll("tr"):
@@ -74,15 +74,15 @@ for table in soup.findAll(("table", { "class" : "wikitable sortable" })):
             Date.append(cells[0].find(text=True)+' '+cells[1].find(text=True))
             Lat.append(cells[3].find(text=True))
             Long.append(cells[4].find(text=True))
-            Death.append(cells[5].find(text=True))  #Only deaths no missings
+            Fatalities.append(cells[5].find(text=True))  #Only deaths no missings
             Mag.append(cells[6].find(text=True))
 {% endhighlight %}
 
 Now we can put all our lists in a dictionary and then create a <code>pandas.DataFrame</code>. 
 
 {% highlight python %}
-columns=['Date','Lat','Long','Death','Mag']
-diz=dict(zip(columns,[Date,Lat,Long,Death,Mag]))
+columns=["Date","Lat","Long","Fatalities","Mag"]
+diz=dict(zip(columns,[Date,Lat,Long,Fatalities,Mag]))
 eqs=pd.DataFrame(diz,columns=columns)
 {% endhighlight %}
 
@@ -91,7 +91,7 @@ eqs=pd.DataFrame(diz,columns=columns)
 The dataframe we just build looks like
 
 
-| | <strong>Date</strong>|<strong>Lat</strong>	 |<strong>Long</strong>	   |<strong>Death</strong>	|<strong>Mag</strong>|
+| | <strong>Date</strong>|<strong>Lat</strong>	 |<strong>Long</strong>	   |<strong>Fatalities</strong>	|<strong>Mag</strong>|
 | ----:| ---------------------------- | ----------:| ----------:| ----------:|:------:|
 | 0 | January 1, 2001 06:57	|6.898	 |126.579  |0	    |7.5|
 | 1 | January 9, 2001 16:49	|−14.928 |167.170  |0	    |7.1|
@@ -100,19 +100,31 @@ The dataframe we just build looks like
 | 4 |	January 26, 2001 03:16	|23.419	 |70.232   |20,085	|7.7|
 {:.mbtablestyle}
 
+We observe that all columns are objetcs and we would like to have <code>datetime,float,float,int,float</code> respectively
 {% highlight python %}
 In [6]:eqs.info()
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 496 entries, 0 to 495
 Data columns (total 5 columns):
-Date     496 non-null object
-Lat      496 non-null object
-Long     496 non-null object
-Death    496 non-null object
-Mag      496 non-null object
+Date          496 non-null object
+Lat           496 non-null object
+Long          496 non-null object
+Fatalities    496 non-null object
+Mag           496 non-null object
 dtypes: object(5)
 memory usage: 19.5+ KB
 {% endhighlight %}
+
+The first conversion is easy <code>eqs['Date']=pd.to_datetime(eqs['Date'])</code> which transform Date in yyyy-mm-dd HH:MM:SS format. The columns Lat and Long have a dash instead of a minus. The column Fatalities has some entries with comma as thousand separator <code>20,085</code>, others like <code>74 dead</code> (we skipped the missing extracting the table) and finally some ranges <code>87,000~100,000</code>. So we want to remove commas, the word dead and (arbitrarily) we take just the smallest number in a range.
+
+
+{% highlight python %}
+eqs["Lat"]=eqs["Lat"].apply(lambda x: x.replace('−','-'))   #replace dash with minus
+eqs["Long"]=eqs["Long"].apply(lambda x: x.replace('−','-')) #replace dash with minus
+eqs["Fatalities"]=eqs["Fatalities"].apply(lambda x: x.replace(',','').replace(' dead','')) # remove commas and dead
+df["Fatalities"]=df["Fatalities"].apply(lambda x: x.split('~',1)[0]) #In case of a range like 10~15 return the smallest value
+{% endhighlight %}
+
 
 # 3. Data Analisys
 
@@ -120,6 +132,10 @@ memory usage: 19.5+ KB
 
 
 <!--
+{% highlight python %}
+{% endhighlight %}
+
+<code></code>
 
 <strong>Bold</strong>
 <em>Italics</em>
