@@ -100,6 +100,19 @@ The dataframe we just build looks like
 | 4 |	January 26, 2001 03:16	|23.419	 |70.232   |20,085	|7.7|
 {:.mbtablestyle}
 
+{% highlight python %}
+In [6]:eqs.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 496 entries, 0 to 495
+Data columns (total 5 columns):
+Date     496 non-null object
+Lat      496 non-null object
+Long     496 non-null object
+Death    496 non-null object
+Mag      496 non-null object
+dtypes: object(5)
+memory usage: 19.5+ KB
+{% endhighlight %}
 
 # 3. Data Analisys
 
