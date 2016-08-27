@@ -91,7 +91,7 @@ eqs=pd.DataFrame(diz,columns=columns)
 The dataframe we just build looks like
 
 
-| | Date	                |Lat	 |Long	   |Death	|Mag|
+| | <strong>Date</strong>|<strong>Lat</strong>	 |<strong>Long</strong>	   |<strong>Death</strong>	|<strong>Mag</strong>|
 | ----:| ---------------------------- | ----------:| ----------:| ----------:|:------:|
 | 0 | January 1, 2001 06:57	|6.898	 |126.579  |0	    |7.5|
 | 1 | January 9, 2001 16:49	|−14.928 |167.170  |0	    |7.1|
