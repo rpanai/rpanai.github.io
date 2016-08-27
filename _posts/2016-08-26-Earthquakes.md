@@ -9,7 +9,7 @@ After the last earthquake in [Italy](http://www.usgs.gov/news/magnitude-62-earth
 
 I would like to  analyze the number of deaths for eartquakes of magnitudo included between 6 and 6.5. Unfortunatly [USGS](http://www.usgs.gov/) doesn't provide this information so I have to take it from [Wikipedia](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes).
 
-# Scrape table(s) from Wikipedia
+#1. Scrape table(s) from Wikipedia
 
 On this [page](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes) there are the tables reporting all eartquakes from 2001 to date. They are consistently formatted, they report deaths and missings. In the comment columns we can observe that different magnitudos are used but, in order to don't [overcomplicate](http://gji.oxfordjournals.org/content/199/2/805.abstract) things, we can omit it.
 
@@ -19,6 +19,37 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 {% endhighlight %}
+
+{% highlight python %}
+url="https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes"
+headers = {"User-Agent": "Mozilla/5.0"}
+req=requests.get(url,headers=headers)
+soup = BeautifulSoup(req.text, "lxml")  #Without "lxml" there is a Warning.
+{% endhighlight %}
+
+{% highlight python %}
+Date=[]
+Lat=[]
+Long=[]
+Death=[]
+Mag=[]
+for table in soup.findAll(("table", { "class" : "wikitable sortable" })):
+    for row in table.findAll("tr"):
+        cells= row.findAll("td")
+        if len(cells)==9:
+            Date.append(cells[0].find(text=True)+' '+cells[1].find(text=True))
+            Lat.append(cells[3].find(text=True))
+            Long.append(cells[4].find(text=True))
+            Death.append(cells[5].find(text=True))  #Only deaths no missings
+            Mag.append(cells[6].find(text=True))
+{% endhighlight %}
+
+{% highlight python %}
+columns=['Date','Lat','Long','Death','Mag']
+diz=dict(zip(columns,[Date,Lat,Long,Death,Mag]))
+eartquakes_2001_to_date=pd.DataFrame(diz,columns=columns)
+{% endhighlight %}
+
 <!--
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
