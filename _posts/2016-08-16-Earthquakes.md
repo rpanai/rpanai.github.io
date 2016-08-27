@@ -7,7 +7,7 @@ After the last earthquake in [Italy](http://www.usgs.gov/news/magnitude-62-earth
 
 What I would like to do is analyze the number of deaths for eartquakes of magnitudo included between 6 and 6.5. Unfortunatly [USGS](http://www.usgs.gov/) doesn't provide this information so I have to take it from [Wikipedia](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes).
 
-
+# Scrape table from Wikipedia
 
 <!--
 ![_config.yml]({{ site.baseurl }}/images/config.png)
