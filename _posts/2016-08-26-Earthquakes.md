@@ -93,12 +93,14 @@ The dataframe we just build looks like
 {% highlight python %}
 In [5]: eqs.head()
 Out[5]:
-    Date	                Lat	     Long	    Death	    Mag
-0   January 1, 2001 06:57	 6.898	 126.579        0	    7.5
-1   January 9, 2001 16:49	−14.928	 167.170	    0	    7.1
-2   January 10, 2001 16:02	 57.078	−153.211	    0	    7.0
-3   January 13, 2001 17:33	 13.049	−88.660	      944	    7.7
-4   January 26, 2001 03:16	 23.419	 70.232	    20,085	    7.7
+
+Date	Lat	Long	Death	Mag
+0	January 1, 2001 06:57	6.898	126.579	0	7.5
+1	January 9, 2001 16:49	−14.928	167.170	0	7.1
+2	January 10, 2001 16:02	57.078	−153.211	0	7.0
+3	January 13, 2001 17:33	13.049	−88.660	944	7.7
+4	January 26, 2001 03:16	23.419	70.232	20,085	7.7
+
 {% endhighlight %}
 
 
