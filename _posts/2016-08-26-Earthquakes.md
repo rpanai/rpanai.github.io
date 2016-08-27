@@ -59,7 +59,7 @@ We want to <code>findALL</code> the tables which class is  <code>"wikitable sort
 </tr>
 {% endhighlight %}
 
-Finally every cell is delimited by <code>td</code>, another job for <code>findALL</code>. The last part involve select the cells we want to store and count the cells (they are 9). In this case we want Date and Time (we better merge directly), Latitude, Longitude, Fatalities and Magnitude. These are columns 1,2,4,5,6,7 but <em>Naturals</em> numbers begin with 0 and so it is in Computer Science so, we are looking for columns 0,1,3,4,5,6.
+Finally every cell is delimited by <code>td</code>, another job for <code>findALL</code>. The last part involve select the cells we want to store and count the cells (they are 9). In this case we want Date and Time (we better merge directly), Latitude, Longitude, Fatalities and Magnitude. These are the columns 0,1,3,4,5,6.
 
 {% highlight python %}
 Date=[]
