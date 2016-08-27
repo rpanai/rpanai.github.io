@@ -9,7 +9,7 @@ After the last earthquake in [Italy](http://www.usgs.gov/news/magnitude-62-earth
 
 I would like to  analyze the number of deaths for eartquakes of magnitudo included between 6 and 6.5. Unfortunatly [USGS](http://www.usgs.gov/) doesn't provide this information so I have to take it from [Wikipedia](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes).
 
-#1. Scrape table(s) from Wikipedia
+# 1. Scrape table(s) from Wikipedia
 
 On this [page](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes) there are the tables reporting all eartquakes from 2001 to date. They are consistently formatted, they report deaths and missings. In the comment columns we can observe that different magnitudos are used but, in order to don't [overcomplicate](http://gji.oxfordjournals.org/content/199/2/805.abstract) things, we can omit it.
 
