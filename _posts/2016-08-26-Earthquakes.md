@@ -32,7 +32,7 @@ req=requests.get(url,headers=headers)
 soup = BeautifulSoup(req.text, "lxml")  #Without "lxml" there is a Warning.
 {% endhighlight %}
 
-At this point we have to open the [url](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes)  <span style="background-color:#ccc9f1;">right-click -> View page source</span> to understand how tables are html formatted.
+At this point we have to open the [url](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes) and then <span style="background-color:#ccc9f1;">right-click -> View page source</span> to understand how tables are html formatted.
 
 {% highlight python %}
 Date=[]
