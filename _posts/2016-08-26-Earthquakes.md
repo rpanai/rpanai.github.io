@@ -98,13 +98,8 @@ The dataframe we just build looks like
 | 2|	January 10, 2001 16:02	|57.078	 |−153.211 |0	    |7.0|
 | 3|	January 13, 2001 17:33	|13.049	 |−88.660  |944	    |7.7|
 | 4|	January 26, 2001 03:16	|23.419	 |70.232   |20,085	|7.7|
+{:.mbtablestyle}
 
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
 
 # 3. Data Analisys
 
