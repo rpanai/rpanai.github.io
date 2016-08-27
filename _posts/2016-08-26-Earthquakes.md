@@ -100,6 +100,12 @@ The dataframe we just build looks like
 | 4|	January 26, 2001 03:16	|23.419	 |70.232   |20,085	|7.7|
 
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 # 3. Data Analisys
 
 # 4. Plot
