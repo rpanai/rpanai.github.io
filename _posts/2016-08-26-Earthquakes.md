@@ -21,7 +21,8 @@ import pandas as pd
 {% endhighlight %}
 
 
-We need requests to fetch the url and BeautifulSoup to tranform the ugly mess in 
+We need requests to fetch the url and BeautifulSoup to tranform the ugly mess in <code>req.text</code> in somethin more 
+<em>digestible</em> like a soup.
 
 <strong>Bold</strong>
 <em>Italics</em>
@@ -57,6 +58,10 @@ earthquakes_2001_to_date=pd.DataFrame(diz,columns=columns)
 {% endhighlight %}
 
 <!--
+
+<strong>Bold</strong>
+<em>Italics</em>
+<u>Underline</u>
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
 The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the [Jekyll Now repository](https://github.com/barryclark/jekyll-now) on GitHub.
