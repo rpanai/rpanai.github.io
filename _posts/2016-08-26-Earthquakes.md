@@ -100,7 +100,19 @@ The dataframe we just build looks like
 | 4 |	January 26, 2001 03:16	|23.419	 |70.232   |20,085	|7.7|
 {:.mbtablestyle}
 
-
+|-----------------+------------+-----------------+----------------|
+| Default aligned |Left aligned| Center aligned  | Right aligned  |
+|-----------------|:-----------|:---------------:|---------------:|
+| First body part |Second cell | Third cell      | fourth cell    |
+| Second line     |foo         | **strong**      | baz            |
+| Third line      |quux        | baz             | bar            |
+|-----------------+------------+-----------------+----------------|
+| Second body     |            |                 |                |
+| 2 line          |            |                 |                |
+|=================+============+=================+================|
+| Footer row      |            |                 |                |
+|-----------------+------------+-----------------+----------------|
+{:.mbtablestyle}
 # 3. Data Analisys
 
 # 4. Plot
