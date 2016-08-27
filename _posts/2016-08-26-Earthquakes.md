@@ -2,12 +2,11 @@
 layout: post
 title: Earthquakes Data Analisys 
 ---
-Scrape tables with BeautifulSoup, create a Pandas dataframe and analyze it.
+<strong>Python</strong>. Scrape tables with <strong>BeautifulSoup</strong>. Create a <strong>Pandas</strong> dataframe and analyze it.
 
+After the last earthquake in [Italy](http://www.usgs.gov/news/magnitude-62-earthquake-central-italy) I was surprised by this [statement](http://www.huffingtonpost.it/2016/08/24/mario-tozzi_n_11672740.html): "Italy is like Middle East. An earthquake of magnitude 6 should not generate such a disaster". There are several things I don't like about that statement, furthermore I moved to New Zealand few months after the [2011 Christchurch earthquake](https://en.wikipedia.org/wiki/2011_Christchurch_earthquake) and that was another magnitude 6 earthquake.
 
-After the last earthquake in [Italy](http://www.usgs.gov/news/magnitude-62-earthquake-central-italy) I was surprised by this [statement](http://www.huffingtonpost.it/2016/08/24/mario-tozzi_n_11672740.html): "Italy is like Middle East. An earthquake of magnitude 6 should not generate such a disaster". There are several things I don't like about that statement, furthermore I moved to New Zealand few months after the [2011 Christchurch earthquake](https://en.wikipedia.org/wiki/2011_Christchurch_earthquake) and that was another magnitudo 6 earthquake.
-
-I would like to  analyze the number of deaths for eartquakes of magnitudo included between 6 and 6.5. Unfortunatly [USGS](http://www.usgs.gov/) doesn't provide this information so I have to take it from [Wikipedia](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes).
+I would like to  analyze the number of deaths for eartquakes of magnitude included between 6 and 6.5. Unfortunatly [USGS](http://www.usgs.gov/) doesn't provide this information so I have to take it from [Wikipedia](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes).
 
 # 1. Scrape table(s) from Wikipedia
 
@@ -44,7 +43,24 @@ List of earthquakes in 2001</a>
 <table class="wikitable sortable">
 {% endhighlight %}
 
-We want to <code>findALL</code> the tables which class is  <code>"wikitable sortable"</code>. Next we should know that the rows in a html table are delimeted by <span style="background-color:#ccc9f1;">tr</span> so again we want to <code>findALL</code> of them.
+We want to <code>findALL</code> the tables which class is  <code>"wikitable sortable"</code>. Next we should know that the rows in a html table are delimeted by <code>tr</code> so again we want to <code>findALL</code> of them.
+
+{% highlight html %}
+<tr>
+<td>January 1, 2001</td>
+<td>06:57</td>
+<td><a href="/wiki/Mindanao" title="Mindanao">Mindanao</a>, Philippines</td>
+<td>6.898</td>
+<td>126.579</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:right;">7.5</td>
+<td>M<sub>w</sub> (HRV).</td>
+<td></td>
+</tr>
+{% endhighlight %}
+
+Finally every cell is delimited by <code>td</code>, another job for <code>findALL</code>. The last part involve select the cells we want to store and count the cells (they are 9). In this case we want Date and Time (we better merge directly), Latitude, Longitude, Fatalities and Magnitude. These are columns 1,2,4,5,6,7 but <em>Naturals</em> numbers begin with 0 and so is in Computer Science so, we are looking for columns 0,1,3,4,5,6.
+
 {% highlight python %}
 Date=[]
 Lat=[]
@@ -61,6 +77,8 @@ for table in soup.findAll(("table", { "class" : "wikitable sortable" })):
             Death.append(cells[5].find(text=True))  #Only deaths no missings
             Mag.append(cells[6].find(text=True))
 {% endhighlight %}
+
+Now we can put all our lists in a dictionary and then create a <code>pandas.DataFrame</code>. 
 
 {% highlight python %}
 columns=['Date','Lat','Long','Death','Mag']
