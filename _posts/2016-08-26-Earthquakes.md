@@ -13,7 +13,8 @@ I would like to  analyze the number of deaths for eartquakes of magnitudo includ
 
 On this [page](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes) there are the tables reporting all eartquakes from 2001 to date. They are consistently formatted, they report deaths and missings. In the comment columns we can observe that different magnitudos are used but, in order to don't [overcomplicate](http://gji.oxfordjournals.org/content/199/2/805.abstract) things, we can omit it.
 
-We are going to need the following modules
+The following modules are required
+
 {% highlight python %}
 from bs4 import BeautifulSoup
 import requests
