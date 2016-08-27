@@ -103,6 +103,7 @@ Date	Lat	Long	Death	Mag
 
 {% endhighlight %}
 
+<table border="1" class="dataframe">\n  <thead>\n    <tr style="text-align: right;">\n      <th></th>\n      <th>Date</th>\n      <th>Lat</th>\n      <th>Long</th>\n      <th>Death</th>\n      <th>Mag</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>January 1, 2001 06:57</td>\n      <td>6.898</td>\n      <td>126.579</td>\n      <td>0</td>\n      <td>7.5</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>January 9, 2001 16:49</td>\n      <td>−14.928</td>\n      <td>167.170</td>\n      <td>0</td>\n      <td>7.1</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>January 10, 2001 16:02</td>\n      <td>57.078</td>\n      <td>−153.211</td>\n      <td>0</td>\n      <td>7.0</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>January 13, 2001 17:33</td>\n      <td>13.049</td>\n      <td>−88.660</td>\n      <td>944</td>\n      <td>7.7</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>January 26, 2001 03:16</td>\n      <td>23.419</td>\n      <td>70.232</td>\n      <td>20,085</td>\n      <td>7.7</td>\n    </tr>\n  </tbody>\n</table>
 
 # 3. Data Analisys
 
