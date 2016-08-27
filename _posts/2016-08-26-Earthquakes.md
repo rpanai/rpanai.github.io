@@ -33,7 +33,13 @@ req=requests.get(url,headers=headers)
 soup = BeautifulSoup(req.text, "lxml")  #Without "lxml" there is a Warning.
 {% endhighlight %}
 
-At this point we have to open the [url](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes) and then <span style="background-color:#ccc9f1;">right-click -> View page source</span> to understand how tables are html formatted.
+At this point we have to open the [url](https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes) and then <span style="background-color:#ccc9f1;">right-click -> View page source</span> to understand how tables are html formatted. There is a table for year and it is sortable
+
+{% highlight html %}
+<h2><span class="mw-headline" id="2001">2001</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=List_of_21st-century_earthquakes&amp;action=edit&amp;section=1" title="Edit section: 2001">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div role="note" class="hatnote">Main article: <a href="/wiki/List_of_earthquakes_in_2001" title="List of earthquakes in 2001">List of earthquakes in 2001</a></div>
+<table class="wikitable sortable">
+{% endhighlight %}
 
 {% highlight python %}
 Date=[]
