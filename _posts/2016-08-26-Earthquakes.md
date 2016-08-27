@@ -20,6 +20,12 @@ import requests
 import pandas as pd
 {% endhighlight %}
 
+
+We need requests to fetch the url and BeautifulSoup to tranform the ugly mess in 
+
+<strong>Bold</strong>
+<em>Italics</em>
+<u>Underline</u>
 {% highlight python %}
 url="https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes"
 headers = {"User-Agent": "Mozilla/5.0"}
@@ -47,7 +53,7 @@ for table in soup.findAll(("table", { "class" : "wikitable sortable" })):
 {% highlight python %}
 columns=['Date','Lat','Long','Death','Mag']
 diz=dict(zip(columns,[Date,Lat,Long,Death,Mag]))
-eartquakes_2001_to_date=pd.DataFrame(diz,columns=columns)
+earthquakes_2001_to_date=pd.DataFrame(diz,columns=columns)
 {% endhighlight %}
 
 <!--
