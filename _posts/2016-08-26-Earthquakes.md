@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Earthquakes Data Analisys with Python
+title: Earthquakes and Death Toll with Python
 ---
 Scrape tables with <strong>BeautifulSoup</strong>. Create a <strong>Pandas</strong> dataframe and analyze it.
 
@@ -153,7 +153,7 @@ The dataframe looks like
 |4|	2001-01-26 03:16:00|	23.419|	70.232|	20085|	7.7|
 {:.mbtablestyle}
 
-And we can save it to csv
+We can save it to csv
 {% highlight python %}
 eqs.to_csv('earthquakes_from_2001_to_date.csv',index=False)
 {% endhighlight %}
@@ -161,8 +161,40 @@ eqs.to_csv('earthquakes_from_2001_to_date.csv',index=False)
 
 # 3. Data Analisys
 
-# 4. Plot
+With the our data we want to plot the earthquakes and their death tolls. There are nice tutorials to plot maps in python: [1](http://introtopython.org/visualization_earthquakes.html), [2](https://www.pfenninger.org/posts/mapping-the-worlds-nuclear-power-plants). We need the following modules
 
+{% highlight python %}
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import pandas as pd
+{% endhighlight %}
+
+If we are on a new session we first load the data  
+
+{% highlight python %}
+eqs=pd.read_csv("earthquakes_from_2001_to_date.csv")
+{% endhighlight %}
+Then we can plot all the earthquakes of magintude bigger or equal to 6.0
+
+{% highlight python %}
+df=eqs[(eqs.Mag>=6)]
+m = Basemap(projection='cyl', ellps='WGS84',
+            llcrnrlon=-180, llcrnrlat=-90, urcrnrlon=180, urcrnrlat=90,
+            resolution='c', suppress_ticks=True)
+fig = plt.figure(figsize=(16, 16))
+m.drawmapboundary(fill_color=None, linewidth=0)
+m.drawcoastlines(color='#4C4C4C', linewidth=0.5)
+m.drawcountries()
+m.fillcontinents(color='#F2E6DB',lake_color='#DDF2FD')
+min_marker_size=0.5 
+for index,d in df.iterrows():
+    x,y = m(d.Long, d.Lat)
+    msize = d.Mag * min_marker_size
+    marker_string = get_marker_color(d.Mag)
+    m.plot(x, y, marker_string, markersize=msize)
+plt.show()
+{% endhighlight %}
+![_config.yml]({{ site.baseurl }}/images/mag_6plus.png)
 
 <!--
 {% highlight python %}
