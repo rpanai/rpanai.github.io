@@ -114,7 +114,7 @@ dtypes: object(5)
 memory usage: 19.5+ KB
 {% endhighlight %}
 
-We wanr to covert Date in yyyy-mm-dd HH:MM:SS format. The columns Lat and Long have a dash or a hypen instead of a minus. The column Fatalities has some entries with comma as thousand separator <code>20,085</code>, others like <code>74 dead</code> (we skipped the missing extracting the table) and finally some ranges <code>87,000~100,000</code>. So we want to remove commas, the word dead and (arbitrarily) we take just the smallest number in a range.  
+We want to covert the dates in yyyy-mm-dd HH:MM:SS format. The columns Lat and Long have a dash or a hypen instead of a minus. The column Fatalities has some entries with comma as thousand separator <code>20,085</code>, others like <code>74 dead</code> (we skipped the missing extracting the table) and finally some ranges <code>87,000~100,000</code>. So we want to remove commas, the word dead and (arbitrarily) we take just the smallest number in a range.  
 
 {% highlight python %}
 eqs["Lat"]=eqs["Lat"].apply(lambda x: x.replace('−','-').replace('–','-'))   #replace dash or hypen with minus
