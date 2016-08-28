@@ -90,7 +90,6 @@ eqs=pd.DataFrame(diz,columns=columns)
 
 The dataframe we just build looks like
 
-
 | | <strong>Date</strong>|<strong>Lat</strong>	 |<strong>Long</strong>	   |<strong>Fatalities</strong>	|<strong>Mag</strong>|
 | ----:| ---------------------------- | ----------:| ----------:| ----------:|:------:|
 | 0 | January 1, 2001 06:57	|6.898	 |126.579  |0	    |7.5|
@@ -115,14 +114,47 @@ dtypes: object(5)
 memory usage: 19.5+ KB
 {% endhighlight %}
 
-The first conversion is easy <code>eqs['Date']=pd.to_datetime(eqs['Date'])</code> which transform Date in yyyy-mm-dd HH:MM:SS format. The columns Lat and Long have a dash instead of a minus. The column Fatalities has some entries with comma as thousand separator <code>20,085</code>, others like <code>74 dead</code> (we skipped the missing extracting the table) and finally some ranges <code>87,000~100,000</code>. So we want to remove commas, the word dead and (arbitrarily) we take just the smallest number in a range.
-
+We wanr to covert Date in yyyy-mm-dd HH:MM:SS format. The columns Lat and Long have a dash or a hypen instead of a minus. The column Fatalities has some entries with comma as thousand separator <code>20,085</code>, others like <code>74 dead</code> (we skipped the missing extracting the table) and finally some ranges <code>87,000~100,000</code>. So we want to remove commas, the word dead and (arbitrarily) we take just the smallest number in a range.  
 
 {% highlight python %}
-eqs["Lat"]=eqs["Lat"].apply(lambda x: x.replace('−','-'))   #replace dash with minus
-eqs["Long"]=eqs["Long"].apply(lambda x: x.replace('−','-')) #replace dash with minus
+eqs["Lat"]=eqs["Lat"].apply(lambda x: x.replace('−','-').replace('–','-'))   #replace dash or hypen with minus
+eqs["Long"]=eqs["Long"].apply(lambda x: x.replace('−','-').replace('–','-')) #replace dash or hypen with minus
 eqs["Fatalities"]=eqs["Fatalities"].apply(lambda x: x.replace(',','').replace(' dead','')) # remove commas and dead
-df["Fatalities"]=df["Fatalities"].apply(lambda x: x.split('~',1)[0]) #In case of a range like 10~15 return the smallest value
+eqs["Fatalities"]=eqs["Fatalities"].apply(lambda x: x.split('~',1)[0]) #In case of a range like 10~15 return the smallest value
+#Now we convert Date to datetime and the other columns to numeric
+eqs['Date']=pd.to_datetime(eqs['Date']) 
+eqs[['Lat','Long','Fatalities','Mag']]=eqs[['Lat','Long','Fatalities','Mag']].apply(pd.to_numeric)
+{% endhighlight %}
+
+Everything went right
+{% highlight python %}
+In [8]:
+eqs.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 496 entries, 0 to 495
+Data columns (total 5 columns):
+Date          496 non-null datetime64[ns]
+Lat           496 non-null float64
+Long          496 non-null float64
+Fatalities    496 non-null int64
+Mag           496 non-null float64
+dtypes: datetime64[ns](1), float64(3), int64(1)
+memory usage: 19.5 KB
+{% endhighlight %}
+
+The dataframe looks like
+
+| | <strong>Date</strong>|<strong>Lat</strong>	 |<strong>Long</strong>	   |<strong>Fatalities</strong>	|<strong>Mag</strong>|
+| ----:| ---------------------------- | ----------:| ----------:| ----------:|:------:|
+|0|	2001-01-01 06:57:00|	6.898|	126.579|	0|	7.5|
+|1|	2001-01-09 16:49:00|	-14.928|	167.170|	0|	7.1|
+|2|	2001-01-10 16:02:00|	57.078|	-153.211|	0|	7.0|
+|3|	2001-01-13 17:33:00|	13.049|	-88.660	|944|	7.7|
+|4|	2001-01-26 03:16:00|	23.419|	70.232|	20085|	7.7|
+
+And we can save to csv
+{% highlight python %}
+eqs.to_csv('earthquakes_from_2001_to_date.csv',index=False)
 {% endhighlight %}
 
 
