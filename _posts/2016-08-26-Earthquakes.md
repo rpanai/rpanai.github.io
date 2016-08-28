@@ -167,6 +167,7 @@ With the our data we want to plot the earthquakes and their death tolls. There a
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import pandas as pd
+import math
 {% endhighlight %}
 
 If we are on a new session we first load the data  
@@ -174,7 +175,6 @@ If we are on a new session we first load the data
 {% highlight python %}
 eqs=pd.read_csv("earthquakes_from_2001_to_date.csv")
 {% endhighlight %}
-Then we can plot all the earthquakes of magintude bigger or equal to 6.0
 
 {% highlight python %}
 df=eqs[(eqs.Mag>=6)]
@@ -194,7 +194,29 @@ for index,d in df.iterrows():
     m.plot(x, y, marker_string, markersize=msize)
 plt.show()
 {% endhighlight %}
-![_config.yml]({{ site.baseurl }}/images/mag_6plus.png)
+![_config.yml]({{ site.baseurl }}/images/2016-08-26-mag_6plus.png)
+
+{% highlight python %}
+df=eqs[(eqs.Mag>=6) & (eqs.Mag<=6.5)]
+m=Basemap(projection='robin', resolution = 'c', area_thresh = 1000.0,
+              lat_0=0, lon_0=0)
+fig = plt.figure(figsize=(16, 16))
+m.drawmapboundary(fill_color=None, linewidth=0)
+m.drawcoastlines(color='#4C4C4C', linewidth=0.5)
+m.drawcountries()
+m.fillcontinents(color='#F2E6DB',lake_color='#DDF2FD')
+color=lambda x: 'red' if x<500 else 'purple'
+for index,d in df.iterrows():
+    x,y = m(d.Long, d.Lat)
+    msize = math.log2(d.Fatalities)
+    m.plot(x, y, marker='o',color=color(d.Fatalities), markersize=msize)
+title_string = "Earthquakes of Magnitude $6.0\leq M\leq 6.5$ - Fatalities \n"
+title_string += "From 2001 to date"
+plt.title(title_string)
+plt.show()
+{% endhighlight %}
+![_config.yml]({{ site.baseurl }}/images/2016-08-26-fatalities.png)
+
 
 <!--
 {% highlight python %}
