@@ -216,7 +216,7 @@ plt.title(title_string)
 plt.show()
 {% endhighlight %}
 ![_config.yml]({{ site.baseurl }}/images/2016-08-26-fatalities.png)
-
+The purple dots indicates more than 500 fatalities.
 
 <!--
 {% highlight python %}
