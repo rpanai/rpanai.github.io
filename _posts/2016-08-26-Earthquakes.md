@@ -151,8 +151,9 @@ The dataframe looks like
 |2|	2001-01-10 16:02:00|	57.078|	-153.211|	0|	7.0|
 |3|	2001-01-13 17:33:00|	13.049|	-88.660	|944|	7.7|
 |4|	2001-01-26 03:16:00|	23.419|	70.232|	20085|	7.7|
+{:.mbtablestyle}
 
-And we can save to csv
+And we can save it to csv
 {% highlight python %}
 eqs.to_csv('earthquakes_from_2001_to_date.csv',index=False)
 {% endhighlight %}
