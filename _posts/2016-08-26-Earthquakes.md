@@ -217,7 +217,7 @@ plt.show()
 {% endhighlight %}
 ![_config.yml]({{ site.baseurl }}/images/2016-08-26-fatalities.png)
 
-Now it is the time to analyze the data. We restrict the range of magnitude between 6 and 6.5 (included),
+Now it is the time to analyze the data. We restrict the range of magnitude between 6.0 and 6.5 (included),
 
 {% highlight python %}
 eqs_range=eqs[(eqs.Mag>=6) & (eqs.Mag<=6.5)]
@@ -277,8 +277,27 @@ Deaths ≥  200, Prob:   13.10%
 Deaths ≥  250, Prob:   11.90%
 Deaths ≥  500, Prob:    5.95%
 {% endhighlight %}
+This says that every earthquake of magnitude between 6.0 and 6.5 in the XXI century comes with id death toll but just sligthly less than 40% have a death toll of 10 or more. In this setting
+{% highlight python %}
+In [51]:eqs_range[eqs_range.Fatalities>=10]['Fatalities'].mean()
+Out[51]:352.59375
+{% endhighlight %}
+{% highlight python %}
+prob2=lambda x: eqs_range[(eqs_range.Fatalities>=10)  & 
+                          (eqs_range.Fatalities>=x)].shape[0]/eqs_range[eqs_range.Fatalities>=10].shape[0]*100
+for i in ind[3:]:
+    print("Deaths \u2265 {:4d}, Prob: {:7.2f}%".format(i,prob2(i)))
+
+Deaths ≥   50, Prob:   50.00%
+Deaths ≥  100, Prob:   43.75%
+Deaths ≥  200, Prob:   34.38%
+Deaths ≥  250, Prob:   31.25%
+Deaths ≥  500, Prob:   15.62%
+{% endhighlight %}
 
 
+# 4. Conclusions(?)
+In order to draw conclusions we need far more data as: deep and duration of earthquakes, the distance from epicentre to first town  and/or the density of population at any given point. Right now we can say that eartquakes of magnitude 6.0~6.5 always kill people and if they kill more than 10 person the chance they kill more than 200 is one over three.
 
 <!--
 {% highlight python %}
