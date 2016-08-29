@@ -177,7 +177,7 @@ eqs=pd.read_csv("earthquakes_from_2001_to_date.csv")
 {% endhighlight %}
 
 {% highlight python %}
-df=eqs[(eqs.Mag>=6)]
+df=eqs[eqs.Mag>=6]
 m = Basemap(projection='cyl', ellps='WGS84',
             llcrnrlon=-180, llcrnrlat=-90, urcrnrlon=180, urcrnrlat=90,
             resolution='c', suppress_ticks=True)
@@ -186,31 +186,31 @@ m.drawmapboundary(fill_color=None, linewidth=0)
 m.drawcoastlines(color='#4C4C4C', linewidth=0.5)
 m.drawcountries()
 m.fillcontinents(color='#F2E6DB',lake_color='#DDF2FD')
-min_marker_size=0.5 
 for index,d in df.iterrows():
     x,y = m(d.Long, d.Lat)
-    msize = d.Mag * min_marker_size
-    marker_string = get_marker_color(d.Mag)
-    m.plot(x, y, marker_string, markersize=msize)
+    m.plot(x, y, 'ro',alpha=0.8, markersize=3.0)
+title_string = "Earthquakes of Magnitude $M \geq$ 6.0\n"
+title_string += "From 2001 to date"
+plt.title(title_string)
 plt.show()
 {% endhighlight %}
 ![_config.yml]({{ site.baseurl }}/images/2016-08-26-mag_6plus.png)
 
 {% highlight python %}
-df=eqs[(eqs.Mag>=6) & (eqs.Mag<=6.5)]
-m=Basemap(projection='robin', resolution = 'c', area_thresh = 1000.0,
-              lat_0=0, lon_0=0)
+df=eqs[(eqs.Mag>=6) & (eqs.Mag<=6.5) & (eqs.Fatalities>10)]
+m = Basemap(projection='cyl', ellps='WGS84',
+            llcrnrlon=-180, llcrnrlat=-90, urcrnrlon=180, urcrnrlat=90,
+            resolution='c', suppress_ticks=True)
 fig = plt.figure(figsize=(16, 16))
 m.drawmapboundary(fill_color=None, linewidth=0)
 m.drawcoastlines(color='#4C4C4C', linewidth=0.5)
 m.drawcountries()
 m.fillcontinents(color='#F2E6DB',lake_color='#DDF2FD')
-color=lambda x: 'red' if x<500 else 'purple'
 for index,d in df.iterrows():
     x,y = m(d.Long, d.Lat)
-    msize = math.log2(d.Fatalities)
-    m.plot(x, y, marker='o',color=color(d.Fatalities), markersize=msize)
-title_string = "Earthquakes of Magnitude $6.0\leq M\leq 6.5$ - Fatalities \n"
+    msize = d.Fatalities/50
+    m.plot(x, y, 'ro',alpha=0.8, markersize=msize)
+title_string = "Fatalities \n Earthquakes of Magnitude $6.0\leq M\leq 6.5$\n"
 title_string += "From 2001 to date"
 plt.title(title_string)
 plt.show()
