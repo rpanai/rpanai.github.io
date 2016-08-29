@@ -167,7 +167,6 @@ With the our data we want to plot the earthquakes and their death tolls. There a
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import pandas as pd
-import math
 {% endhighlight %}
 
 If we are on a new session we first load the data  
