@@ -250,6 +250,36 @@ eqs_range[:20]
 |20|	2013-04-09 11:52:00|	28.500|	51.591|	37|	6.4|
 {:.mbtablestyle}
 
+And do a little of statistic
+{% highlight python %}
+In [15]:eqs_range.shape[0] #Count entries
+Out[15]:84
+{% endhighlight %}
+
+{% highlight python %}
+In [24]:eqs_range.Fatalities.mean() # Average deaths
+Out[24]:135.85714285714286
+{% endhighlight %}
+
+And calculate the probability of n or more deaths
+{% highlight python %}
+prob=lambda x: eqs_range[eqs_range.Fatalities>=x].shape[0]/eqs_range.shape[0]*100
+ind=[1,5,10,50,100,200,250,500]
+for i in ind:
+    print("Deaths \u2265 {:4d}, Prob: {:7.2f}%".format(i,prob(i)))
+    
+Deaths ≥    1, Prob:  100.00%
+Deaths ≥    5, Prob:   47.62%
+Deaths ≥   10, Prob:   38.10%
+Deaths ≥   50, Prob:   19.05%
+Deaths ≥  100, Prob:   16.67%
+Deaths ≥  200, Prob:   13.10%
+Deaths ≥  250, Prob:   11.90%
+Deaths ≥  500, Prob:    5.95%
+{% endhighlight %}
+
+
+
 <!--
 {% highlight python %}
 {% endhighlight %}
