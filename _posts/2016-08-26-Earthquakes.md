@@ -296,7 +296,7 @@ Deaths ≥  500, Prob:   15.62%
 
 
 # 4. Conclusions(?)
-In order to draw conclusions we need far more data as: deep and duration of earthquakes, the distance from epicentre to first town  and/or the density of population at any given point. Right now we can say that eartquakes of magnitude 6.0~6.5 always kill people (but there are stroger eartquakes which don't kill anyone) and, if they kill more than 10 persons the chance they kill more than 200 is one over three.
+In order to draw conclusions we need far more data as: deep and duration of earthquakes, the distance from epicentre to first town  and/or the density of population at any given point. Right now we can say that eartquakes of magnitude 6.0~6.5 always kill people (but there are stronger earthquakes which don't kill anyone) and, if they kill more than 10 persons the chance they kill more than 200 is one over three.
 
 <!--
 {% highlight python %}

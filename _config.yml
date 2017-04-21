@@ -23,7 +23,7 @@ footer-links:
   flickr:
   github: rpanai
   instagram:
-  linkedin:
+  linkedin: roberto-panai
   pinterest:
   rss: # just type anything here for a working RSS icon
   twitter: 
@@ -34,10 +34,16 @@ footer-links:
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
 # You can find your shortname on the Settings page of your Disqus account
-disqus: 
+disqus: https-rpanai-github-io
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics:
+
+---
+layout: default
+comments: true
+# other options
+---
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
