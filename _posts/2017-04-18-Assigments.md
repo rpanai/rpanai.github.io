@@ -5,7 +5,7 @@ title: Generate random assignments/exams in LaTeX with SageMath and Python
 It returns one pdf with questions and one with solutions for each student. Here we generate a Linear Algebra test.
 
 
-**I don't want to read. Just show me the code in [SMC](https://cloud.sagemath.com/projects/49d1983f-3271-414e-9103-6c355446c247/files/Assignments%20Generator/) or [GitHub]()!**
+**I don't want to read. Just show me the code in [SMC](https://cloud.sagemath.com/projects/49d1983f-3271-414e-9103-6c355446c247/files/Assignments%20Generator/) or [GitHub](https://github.com/rpanai/SageMathNotebooks/tree/master/Assignments%20Generator)!**
 
 
 **WARNING: If you download it from github please note that the file `SageMath_notebook.ipynb` is a SageMath jupyter notebook!**
